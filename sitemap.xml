@@ -3,7 +3,7 @@
 
  <!-- HUB -->
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/index.html</loc>
+  <loc>https://massarossapoolvilla.com/index.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>weekly</changefreq>
   <priority>1.0</priority>
@@ -11,31 +11,31 @@
 
  <!-- ВІЛЛИ -->
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/king-villa.html</loc>
+  <loc>https://massarossapoolvilla.com/king-villa.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
  </url>
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/luxury-villa.html</loc>
+  <loc>https://massarossapoolvilla.com/luxury-villa.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
  </url>
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/royal-villa.html</loc>
+  <loc>https://massarossapoolvilla.com/royal-villa.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
  </url>
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/princess-villa.html</loc>
+  <loc>https://massarossapoolvilla.com/princess-villa.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
  </url>
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/queen-villa.html</loc>
+  <loc>https://massarossapoolvilla.com/queen-villa.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.9</priority>
@@ -43,13 +43,13 @@
 
  <!-- СЛУЖБОВІ -->
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/rules.html</loc>
+  <loc>https://massarossapoolvilla.com/rules.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.5</priority>
  </url>
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/fact-sheet.html</loc>
+  <loc>https://massarossapoolvilla.com/fact-sheet.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>yearly</changefreq>
   <priority>0.4</priority>
@@ -57,7 +57,7 @@
 
  <!-- БЛОГ 1 (6 окремих файлів, hreflang) -->
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/blog-1.html</loc>
+  <loc>https://massarossapoolvilla.com/blog-1.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
@@ -65,25 +65,25 @@
  
  <!-- БЛОГИ 2–5 (перемикач мов всередині) -->
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/blog-2.html</loc>
+  <loc>https://massarossapoolvilla.com/blog-2.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
  </url>
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/blog-3.html</loc>
+  <loc>https://massarossapoolvilla.com/blog-3.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
  </url>
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/blog-4.html</loc>
+  <loc>https://massarossapoolvilla.com/blog-4.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
  </url>
  <url>
-  <loc>https://massarossa-pool-villa.netlify.app/blog-5.html</loc>
+  <loc>https://massarossapoolvilla.com/blog-5.html</loc>
   <lastmod>2026-08-08</lastmod>
   <changefreq>monthly</changefreq>
   <priority>0.8</priority>
