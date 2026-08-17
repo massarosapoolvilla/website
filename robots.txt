@@ -10,4 +10,4 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-Sitemap: https://massarossa-pool-villa.netlify.app/sitemap.xml
+Sitemap: https://massarossapoolvilla.com/sitemap.xml
