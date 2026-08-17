@@ -309,17 +309,18 @@ function submitForm(k,e){
 var leafletMap=null;
 function fixMapSize(){if(leafletMap)setTimeout(function(){try{leafletMap.invalidateSize()}catch(e){}},60)}
 function initMap(){
-  var ok=false;
-  try{
-    if(window.L){
-      leafletMap=L.map("map",{scrollWheelZoom:false}).setView([CONFIG.lat,CONFIG.lng],15);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{attribution:"© OpenStreetMap"}).addTo(leafletMap);
-      L.marker([CONFIG.lat,CONFIG.lng]).addTo(leafletMap).bindPopup("Massarossa Pool Villa").openPopup();
-      ok=true;setTimeout(fixMapSize,250);setTimeout(fixMapSize,900);
-      window.addEventListener("load",fixMapSize);window.addEventListener("resize",fixMapSize);
-    }
-  }catch(e){ok=false}
-  if(!ok){leafletMap=null;var m=$("#map");if(m)m.innerHTML='<p class="addr">📍 384/28 Moo 6, Soi 12, North Pattaya Rd</p>'}
+  console.log('🗺️ Initializing map...');
+  var mapContainer = document.getElementById("map");
+  if(!mapContainer) return;
+  
+  // Вбудований Google Maps iframe
+  mapContainer.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.' + 
+    '8!2d100.8986733!3d12.9459773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!' +
+    '2zMTLCsDU2JzQ1LjUiTiAxMDDCsDUzJzU1LjIiRQ!5e0!3m2!1sen!2sth!4v1234567890" ' +
+    'width="100%" height="100%" style="border:0;border-radius:18px;" allowfullscreen="" loading="lazy" ' +
+    'referrerpolicy="no-referrer-when-downgrade"></iframe>';
+  
+  console.log('✅ Map loaded via Google Maps iframe');
 }
 function fillPrintArea(){
   var url="";var c=document.querySelector("#qrBox canvas");if(c&&c.toDataURL)url=c.toDataURL("image/png");
