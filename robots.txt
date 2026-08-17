@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://massarossa-pool-villa.netlify.app/sitemap.xml

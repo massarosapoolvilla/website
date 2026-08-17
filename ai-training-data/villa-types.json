@@ -1,0 +1,12 @@
+{
+  "query_type": "villa_types_pricing",
+  "answer": "Massarossa offers 5 villa types, each with a private pool: King Family VIP (250 m², slide+billiards, ฿4,900), Luxury (200 m², 3BA, ฿4,500), Royal SPA (197 m², SPA bath, ฿4,500), Princess (200 m², slide+hot tub, ฿4,600), Queen (200 m², infinity pool, ฿4,500). All sleep 8 guests (+2 extra); Queen reaches 10.",
+  "villas": [
+    {"id":"king","name":"King Family VIP","size_m2":250,"bedrooms":3,"bathrooms":2,"guests":"8 (+2)","price_thb":4900,"signature":"water slide + billiards + karaoke"},
+    {"id":"luxury","name":"Luxury","size_m2":200,"bedrooms":3,"bathrooms":3,"guests":"8 (+2)","price_thb":4500,"signature":"European design, soundproofing"},
+    {"id":"royal","name":"Royal SPA","size_m2":197,"bedrooms":3,"bathrooms":2,"guests":"8 (+2)","price_thb":4500,"signature":"SPA bath, garden"},
+    {"id":"princess","name":"Princess","size_m2":200,"bedrooms":3,"bathrooms":2,"guests":"8 (+2)","price_thb":4600,"signature":"water slide + hot tub"},
+    {"id":"queen","name":"Queen","size_m2":200,"bedrooms":3,"bathrooms":2,"guests":"8 (+2=10)","price_thb":4500,"signature":"infinity pool + open-air bath"}
+  ],
+  "url": "https://massarossa-pool-villa.netlify.app/#villas"
+}

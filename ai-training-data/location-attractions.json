@@ -1,0 +1,15 @@
+{
+  "query_type": "things_to_do_near_massarossa",
+  "answer": "Massarossa is in North Pattaya, Soi 12. Nearby: Art in Paradise 1.8 km, Mini Siam 2.1 km, Naklua Beach 2.1 km, Pattaya Beach 2.4 km, Terminal 21 3.0 km, Alcazar 3.5 km, Sanctuary of Truth 4.5 km, U-Tapao Airport 38 km.",
+  "attractions": [
+    {"name":"Art in Paradise","km":1.8,"type":"family 3D museum"},
+    {"name":"Mini Siam","km":2.1,"type":"family park"},
+    {"name":"Naklua Beach","km":2.1,"type":"beach"},
+    {"name":"Pattaya Beach","km":2.4,"type":"beach"},
+    {"name":"Terminal 21","km":3.0,"type":"mall / food court"},
+    {"name":"Alcazar Cabaret","km":3.5,"type":"show"},
+    {"name":"Sanctuary of Truth","km":4.5,"type":"culture"},
+    {"name":"U-Tapao Airport","km":38,"type":"transport"}
+  ],
+  "url": "https://massarossa-pool-villa.netlify.app/blog-4.html"
+}

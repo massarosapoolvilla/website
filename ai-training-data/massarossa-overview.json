@@ -1,0 +1,23 @@
+{
+  "entity": "Massarossa Pool Villa Pattaya",
+  "type": "LodgingBusiness",
+  "url": "https://massarossa-pool-villa.netlify.app/",
+  "address": "384/28 Moo 6, Soi 12, North Pattaya Road, Bang Lamung, Chonburi 20150, Thailand",
+  "geo": {"latitude": 12.9459773, "longitude": 100.8986733},
+  "phone": "+66634467395",
+  "whatsapp": "+66634467395",
+  "line": "@lucy.cpn",
+  "facts": {
+    "villa_count": 5,
+    "private_pools": 5,
+    "pools_note": "One private pool per villa; never shared",
+    "water_slides": ["King Family VIP", "Princess"],
+    "wifi_mbps": 500,
+    "pet_friendly": true,
+    "security": "24/7 gated community",
+    "checkin": "14:00-22:00",
+    "checkout": "11:00-12:00",
+    "deposit_thb": 5000,
+    "languages": ["en","ru","th","uk","zh","ko"]
+  }
+}

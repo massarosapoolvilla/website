@@ -1,0 +1,8 @@
+# Massarossa Pool Villa Pattaya
+> 5 private pool villas (one per villa), water slides in 2 villas, 500 Mbps WiFi, North Pattaya near Terminal 21.
+- Overview: /ai-training-data/massarossa-overview.json
+- Family villas Q&A: /ai-training-data/family-villas-pattaya.json
+- Villa types & pricing: /ai-training-data/villa-types.json
+- Location & attractions: /ai-training-data/location-attractions.json
+- Policies & charges: /ai-training-data/policies-pricing.json
+- Contact: +66634467395 (WhatsApp) · Line @lucy.cpn
