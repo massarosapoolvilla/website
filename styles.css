@@ -1,14 +1,76 @@
 /* ============================================================
-   MASSAROSSA POOL VILLA — styles.css (оновлення 2026-08)
-   Витягнуто з <style> старого index.html + «3 календарі в ряд» + .cd.today
-   ============================================================ */
+MASSAROSSA POOL VILLA — styles.css (оновлення 2026-08)
+Витягнуто з <style> старого index.html + «3 календарі в ряд» + .cd.today
+============================================================ */
 :root{--bg:#0c1210;--panel:#131c18;--line:#24342c;--txt:#eef2ea;--mut:#9fb0a5;--gold:#d9b36a;--gold2:#f0d49a;--wa:#25d366;--lnc:#06c755;--red:#e06c5a}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}[hidden]{display:none!important}
 body{background:var(--bg);color:var(--txt);font-family:Manrope,'Noto Sans Thai','Noto Sans SC','Noto Sans KR',sans-serif;line-height:1.6}
 section{scroll-margin-top:80px;padding:70px 0}
 .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 h1,h2,h3{line-height:1.2}
-.dbox{margin:10px 0}.dchk{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--mut);margin-top:8px}
+.dbox{margin:16px 0}
+.dchk{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--txt);margin-top:12px;cursor:pointer;line-height:1.4}
+.dchk input[type="checkbox"]{margin-top:3px;width:18px;height:18px;accent-color:var(--gold);cursor:pointer;flex-shrink:0}
+
+/* ---------- НОВІ СТИЛІ ДЛЯ ЗНИЖКИ 7% ---------- */
+.disc-btn{
+  background:linear-gradient(135deg,var(--gold2),var(--gold));
+  color:#231a08;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.3s;
+  width:100%;
+  text-align:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+.disc-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 20px rgba(217,179,106,0.4);
+}
+
+.disc-form{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:16px;
+  margin-top:12px;
+  animation:fadeIn 0.3s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+
+.disc-applied{
+  margin-top:14px;
+  padding:12px 16px;
+  background:rgba(217,179,106,0.15);
+  border:1px solid var(--gold);
+  border-radius:8px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  animation:fadeIn 0.3s ease;
+}
+.disc-badge{
+  color:var(--gold2);
+  font-weight:700;
+  font-size:15px;
+}
+.disc-saved{
+  color:var(--mut);
+  font-size:14px;
+}
+.disc-saved strong{
+  color:var(--gold);
+  font-size:18px;
+}
+/* ----------------------------------------------- */
+
 .kick{color:var(--gold);text-transform:uppercase;letter-spacing:2px;font-size:13px;font-weight:600}
 h2{font-size:clamp(26px,4vw,40px);margin:8px 0 10px}
 .sub{color:var(--mut);max-width:640px}
@@ -69,21 +131,8 @@ header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(12,18,16,.
 .wcard .btn{margin-top:10px}
 .pet{margin-top:18px;background:#1b2a22;border:1px dashed var(--gold);border-radius:14px;padding:14px 18px;color:#e8dcc0}
 .locgrid{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;margin-top:30px}
-#map{
-  height:380px;
-  width:100%;
-  border-radius:18px;
-  border:1px solid var(--line);
-  overflow:hidden;
-  background:#0e1613;
-}
-#map iframe{
-  width:100%;
-  height:100%;
-  border:0;
-  border-radius:18px;
-  display:block;
-}
+#map{height:380px;width:100%;border-radius:18px;border:1px solid var(--line);overflow:hidden;background:#0e1613}
+#map iframe{width:100%;height:100%;border:0;border-radius:18px;display:block}
 .addr{color:var(--mut);margin:12px 0}
 .rbtns{display:flex;gap:10px;flex-wrap:wrap}
 .places{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
@@ -155,4 +204,4 @@ footer{border-top:1px solid var(--line);padding:26px 0;color:var(--mut);font-siz
 #printArea{display:none}
 @media print{body>*{display:none!important}#printArea{display:block!important}}
 @media(max-width:900px){.feats{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}.vcard:first-child .vimg{height:260px}.whygrid,.locgrid,.bgrid,.faqgrid{grid-template-columns:1fr}.menu{display:none}.bform{grid-template-columns:1fr}.logotxt{font-size:13px}.logotxt small{font-size:8px}}
-@media(max-width:640px){.calrow{grid-template-columns:1fr}}
+@media(max-width:640px){.calrow{grid-template-columns:1fr}.disc-btn{padding:10px 16px;font-size:14px}.disc-form{padding:12px}.disc-saved strong{font-size:16px}}
