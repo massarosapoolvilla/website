@@ -1,11 +1,6 @@
 /* ============================================================
-   MASSAROSSA POOL VILLA — app.js (оновлення 2026-08), частина 1/2
-   Поглинає логіку старого index.html + pricing-engine.js + calendar3.js
-   Залежності: rates.js (CONFIG/VILLAS/RATES/CLEAN/TAX/DISC/NY/PH/PLACES),
-               i18n.js (I18N/LOCALES), leaflet, qrcode
-   ============================================================ */
-
-/* ---------- Хелпери ---------- */
+MASSAROSSA POOL VILLA — app.js (Clean & Updated 2026-08)
+============================================================ */
 function $(s){return document.querySelector(s)}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
 function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
@@ -14,21 +9,17 @@ function hav(a,b,c,d){var R=6371,r=function(x){return x*Math.PI/180};var dl=r(c-
 function photo(v,i){return "images/"+v.id+"/"+(i+1)+".jpg"}
 function fb(i){return PH[i%PH.length]+"?auto=format&fit=crop&w=900&q=60"}
 
-/* ---------- Мова ---------- */
 var lang=localStorage.getItem("mv_lang")||"en";
 function L(k){return (I18N[lang]&&I18N[lang][k])||I18N.en[k]||k}
 
-/* ---------- Стан ---------- */
 var curVilla=null,gIdx=0,calLock={m:false,g:false};
 var forms={
   m:{villa:null,inD:null,outD:null,pre:function(f){return $("#m"+f)}},
   g:{villa:null,inD:null,outD:null,pre:function(f){return $("#g"+f)}}
 };
 
-/* ---------- Глобальний обробник помилок ---------- */
-window.addEventListener("error",function(e){var b=$("#errbar");if(b){b.style.display="block";b.textContent="⚠️ "+e.message+" (line "+e.lineno+")"}});
+window.addEventListener("error",function(e){var b=$("#errbar");if(b){b.style.display="block";b.textContent="️ "+e.message+" (line "+e.lineno+")"}});
 
-/* ---------- applyLang + перемикач ---------- */
 function applyLang(){
   document.documentElement.lang=lang;
   document.querySelectorAll("[data-i18n]").forEach(function(el){el.textContent=L(el.dataset.i18n)});
@@ -44,7 +35,6 @@ document.getElementById("langs").addEventListener("click",function(e){
   lang=b.dataset.lang;localStorage.setItem("mv_lang",lang);applyLang();
 });
 
-/* ---------- Картки вілл ---------- */
 function renderCards(){
   var box=$("#cards");if(!box)return;box.innerHTML="";
   VILLAS.forEach(function(v,i){
@@ -53,7 +43,7 @@ function renderCards(){
       +'<div class="vbadges"><div class="vprice">'+L("from")+" "+v.price.toLocaleString()+" <small>"+L("night")+"</small></div>"
       +'<div class="vnote">'+L("note")+"</div></div></div>"
       +'<div class="vbody"><h3>'+esc(v.name)+'</h3><div class="vtag">'+esc(v.tag)+'</div>'
-      +'<div class="vspec">🛏 '+v.beds+" · 🛁 "+v.baths+" · 👥 "+v.guests+(v.extra?"+"+v.extra:"")+(v.tv?' · 📺 '+v.tv+'"':"")+"</div>"
+      +'<div class="vspec"> '+v.beds+" · 🛁 "+v.baths+" · 👥 "+v.guests+(v.extra?"+"+v.extra:"")+(v.tv?' · 📺 '+v.tv+'"':"")+"</div>"
       +'<div class="varea">'+v.area+" m²</div>"
       +'<div class="tags">'+v.amen.map(function(a){return '<span class="tag">'+L("am_"+a)+"</span>"}).join("")+"</div>"
       +'<div class="vbtns"><a class="btn ghost" href="'+v.id+'-villa.html">'+L("details")+"</a>"
@@ -66,7 +56,6 @@ function renderCards(){
   });
 }
 
-/* ---------- «Поруч» ---------- */
 function renderPlaces(){
   var box=$("#places");if(!box)return;box.innerHTML="";
   PLACES.forEach(function(p){
@@ -77,7 +66,6 @@ function renderPlaces(){
   });
 }
 
-/* ---------- Селекти ---------- */
 function buildSelects(){
   var sel=$("#gVilla");
   if(sel){
@@ -99,7 +87,6 @@ function buildSelects(){
   }
 }
 
-/* ---------- Модалка + галерея ---------- */
 function openModal(id,scroll){
   curVilla=id;forms.m.villa=id;
   var ms=$("#mVilla");if(ms)ms.value=id;
@@ -137,7 +124,7 @@ function showPhoto(v,i){
   document.querySelectorAll("#gThumbs img").forEach(function(t,j){t.classList.toggle("on",j===i)});
 }
 function closeModal(){$("#mback").hidden=true;document.body.style.overflow=""}
-/* ---------- Календар: 3 місяці в ряд + ‹ › (0..11) ---------- */
+
 function scheduleRenderCal(k){if(calLock[k])return;calLock[k]=true;setTimeout(function(){calLock[k]=false;renderCal(k)},30)}
 function renderCal(k){
   var F=forms[k],box=$("#"+(k==="m"?"mCal":"gCal"));if(!box)return;box.innerHTML="";if(!F.villa)return;
@@ -193,7 +180,6 @@ function pickDay(k,d){
   scheduleRenderCal(k);calc(k);
 }
 
-/* ---------- iCal-зайнятість (проксі-ланцюжок, виправлений порядок) ---------- */
 function icsParse(t){
   var out=[],parts=String(t).split("BEGIN:VEVENT");
   for(var i=1;i<parts.length;i++){
@@ -206,9 +192,7 @@ function icsParse(t){
 }
 function isBusy(vId,s){var r=CONFIG.busy[vId]||[];for(var i=0;i<r.length;i++){if(s>=r[i][0]&&s<=r[i][1])return true}return false}
 function rangeBusy(vId,a,b){var d=new Date(a+"T00:00:00"),end=new Date(b+"T00:00:00");while(d<end){if(isBusy(vId,iso(d)))return true;d.setDate(d.getDate()+1)}return false}
-var ICAL_PROXIES=[
-  function(u){return "/ical.php?url="+encodeURIComponent(u)}
-];
+var ICAL_PROXIES=[function(u){return "/ical.php?url="+encodeURIComponent(u)}];
 function loadBusy(vId,done){
   var urls=CONFIG.ical[vId]||[],left=urls.length;
   if(!left){done&&done();return}
@@ -224,7 +208,6 @@ function loadBusy(vId,done){
 }
 function loadAllBusy(){VILLAS.forEach(function(v){loadBusy(v.id,function(){scheduleRenderCal("m");scheduleRenderCal("g")})})}
 
-/* ---------- Ціни: сезон × день × тривалість + CLEAN + TAX + DISC ---------- */
 function isLow(d){var m=d.getMonth()+1,dd=d.getDate();
   if((m===NY.m1&&dd>=NY.d1)||(m===NY.m2&&dd<=NY.d2))return false;
   if(m>4&&m<11)return true;if(m===4)return dd>=20;if(m===11)return dd<=15;return false}
@@ -235,27 +218,69 @@ function nightRate(vId,s,n){
   if(isLow(d)){if(n<=6)return we?R.s[0]:R.s[1];if(n<=15)return R.m;return R.l}
   if(n<=3)return we?R.s[0]:R.s[1];if(n<=7)return R.a;if(n<=15)return R.b;return R.l;
 }
+
+/* ---------- ОНОВЛЕНА ЛОГІКА ЗНИЖКИ 7% ---------- */
 function mkDisc(k){
-  var pp=$("#"+k+"Prepay");if(!pp||$("#"+k+"Disc"))return;
-  var d=document.createElement("div");d.className="dbox";d.id=k+"Disc";d.hidden=true;
-  d.innerHTML='<button type="button" class="btn ghost" id="'+k+'DiscBtn"></button><label class="dchk"><input type="checkbox" id="'+k+'Sub"> <span id="'+k+'SubTxt"></span></label>';
-  pp.parentNode.insertBefore(d,pp.nextSibling);
+  var pp=$("#"+k+"Prepay");
+  if(!pp || $("#"+k+"Disc")) return;
+  var d=document.createElement("div");
+  d.className="dbox";
+  d.id=k+"Disc";
+  d.hidden=true;
+  d.innerHTML=
+    '<button type="button" class="btn disc-btn" id="'+k+'DiscBtn">🎉 <span data-i18n="disc_btn"></span></button>'+
+    '<div class="disc-form" id="'+k+'DiscForm" hidden>'+
+      '<label class="dchk"><input type="checkbox" id="'+k+'Sub"> <span id="'+k+'SubTxt" data-i18n="disc_chk"></span></label>'+
+      '<div id="'+k+'DiscApplied" class="disc-applied" hidden>'+
+        '<span class="disc-badge">✅ <span data-i18n="disc_applied"></span></span>'+
+        '<span class="disc-saved"><span data-i18n="disc_saved"></span> <strong id="'+k+'SavedAmt">฿0</strong></span>'+
+      '</div>'+
+    '</div>';
+  pp.parentNode.insertBefore(d, pp.nextSibling);
 }
-function updDiscLang(){["m","g"].forEach(function(k){var b=$("#"+k+"DiscBtn"),c=$("#"+k+"SubTxt");if(b)b.textContent=L("disc_btn");if(c)c.textContent=L("disc_chk")})}
+
+function updDiscLang(){
+  ["m","g"].forEach(function(k){
+    var b=$("#"+k+"DiscBtn"); if(b) b.querySelector('span').textContent = L("disc_btn");
+    var c=$("#"+k+"SubTxt"); if(c) c.textContent = L("disc_chk");
+    var badge=$("#"+k+"DiscApplied .disc-badge span"); if(badge) badge.textContent = L("disc_applied");
+    var saved=$("#"+k+"DiscApplied .disc-saved span"); if(saved) saved.textContent = L("disc_saved");
+  });
+}
+
 function wireDisc(k){
-  var b=$("#"+k+"DiscBtn"),cb=$("#"+k+"Sub");
-  if(b)b.onclick=function(){window.open(CONFIG.social.fb,"_blank");window.open(CONFIG.social.wa,"_blank")};
-  if(cb)cb.onchange=function(){calc(k)};
+  var b=$("#"+k+"DiscBtn"), cb=$("#"+k+"Sub"), form=$("#"+k+"DiscForm");
+  if(b){
+    b.onclick=function(){
+      form.hidden = !form.hidden;
+      if(window.gtag) gtag("event","click_discount",{villa:forms[k].villa||"any"});
+    };
+  }
+  if(cb){
+    cb.onchange=function(){
+      var applied=$("#"+k+"DiscApplied");
+      if(applied) applied.hidden = !cb.checked;
+      calc(k);
+    };
+  }
 }
+
 function calc(k){
-  var F=forms[k],t=$("#"+(k==="m"?"mTotal":"gTotal")),pp=$("#"+(k==="m"?"mPrepay":"gPrepay")),db=$("#"+k+"Disc"),cb=$("#"+k+"Sub");
-  if(!t)return 0;
+  var F=forms[k], t=$("#"+(k==="m"?"mTotal":"gTotal")), pp=$("#"+(k==="m"?"mPrepay":"gPrepay")), db=$("#"+k+"Disc"), cb=$("#"+k+"Sub"), savedEl=$("#"+k+"SavedAmt");
+  if(!t) return 0;
   var v=F.villa?villa(F.villa):null;
-  if(v&&F.inD&&F.outD){
+  if(v && F.inD && F.outD){
     var n=Math.round((Date.parse(F.outD)-Date.parse(F.inD))/864e5);
-    if(n>0&&n<=60){
-      var sub=0;for(var i=0;i<n;i++){sub+=nightRate(v.id,iso(new Date(Date.parse(F.inD)+i*864e5)),n)}
-      var disc=(n>4&&cb&&cb.checked)?Math.round(sub*DISC/100):0;
+    if(n>0 && n<=60){
+      var sub=0; for(var i=0;i<n;i++){ sub+=nightRate(v.id, iso(new Date(Date.parse(F.inD)+i*864e5)), n); }
+      var disc=(n>4 && cb && cb.checked) ? Math.round(sub*DISC/100) : 0;
+      
+      if(savedEl && disc > 0){
+        savedEl.textContent = "฿" + disc.toLocaleString();
+      } else if(savedEl) {
+        savedEl.textContent = "฿0";
+      }
+
       var tax=Math.round((sub-disc+CLEAN)*TAX/100);
       var tot=sub-disc+CLEAN+tax;
       t.hidden=false;
@@ -265,17 +290,21 @@ function calc(k){
         +(disc?"<br>🎉 "+L("disc_lbl")+": −฿"+disc.toLocaleString():"")
         +"<br>💰 "+L("f_total")+": <b>฿"+tot.toLocaleString()+"</b>"
         +"<br><small>"+L("note")+"</small>";
-      if(db)db.hidden=n<=4;
-      if(CONFIG.paypal&&pp){pp.hidden=false;var pre=Math.round(tot*CONFIG.prepay/100);
+      if(db) db.hidden = (n<=4);
+      if(CONFIG.paypal && pp){
+        pp.hidden=false;
+        var pre=Math.round(tot*CONFIG.prepay/100);
         pp.textContent="💳 "+L("f_prepay")+" ("+CONFIG.prepay+"%): ฿"+pre.toLocaleString();
-        pp.dataset.amt=pre;pp.dataset.v=v.name;}
+        pp.dataset.amt=pre; pp.dataset.v=v.name;
+      }
       return tot;
     }
   }
-  t.hidden=true;if(pp)pp.hidden=true;if(db)db.hidden=true;return 0;
+  t.hidden=true; if(pp) pp.hidden=true; if(db) db.hidden=true;
+  return 0;
 }
+/* ----------------------------------------------- */
 
-/* ---------- Дати/селекти ---------- */
 function onDateChange(k){
   var F=forms[k];F.inD=F.pre("In").value||null;F.outD=F.pre("Out").value||null;
   if(F.inD&&F.outD){
@@ -286,7 +315,6 @@ function onDateChange(k){
   scheduleRenderCal(k);calc(k);
 }
 
-/* ---------- Форми → WhatsApp ---------- */
 function submitForm(k,e){
   e.preventDefault();
   var F=forms[k],v=F.villa?villa(F.villa):null;
@@ -296,7 +324,7 @@ function submitForm(k,e){
   if(!F.inD||!F.outD){alert(L("e_dates"));return}
   var n=Math.round((Date.parse(F.outD)-Date.parse(F.inD))/864e5);
   if(n>30){alert(L("e_range"));return}
-  var msg="🏝 Massarossa Pool Villa Pattaya\n"+L("f_villa")+": "+(v?v.name:L("f_any"))
+  var msg=" Massarossa Pool Villa Pattaya\n"+L("f_villa")+": "+(v?v.name:L("f_any"))
     +"\n"+L("f_in")+": "+F.inD+"\n"+L("f_out")+": "+F.outD+" ("+n+" "+L("f_nights")+")";
   if(v)msg+="\n"+L("f_total")+": ฿"+(n*v.price).toLocaleString();
   msg+="\n"+L("f_name")+": "+name+"\n"+L("f_phone")+": "+phone
@@ -305,21 +333,13 @@ function submitForm(k,e){
   window.open("https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg),"_blank");
 }
 
-/* ---------- Карта / QR / друк / маршрути ---------- */
 var leafletMap=null;
 function fixMapSize(){if(leafletMap)setTimeout(function(){try{leafletMap.invalidateSize()}catch(e){}},60)}
 function initMap(){
   console.log('🗺️ Initializing map...');
   var mapContainer = document.getElementById("map");
   if(!mapContainer) return;
-  
-  // Вбудований Google Maps iframe
-  mapContainer.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.' + 
-    '8!2d100.8986733!3d12.9459773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!' +
-    '2zMTLCsDU2JzQ1LjUiTiAxMDDCsDUzJzU1LjIiRQ!5e0!3m2!1sen!2sth!4v1234567890" ' +
-    'width="100%" height="100%" style="border:0;border-radius:18px;" allowfullscreen="" loading="lazy" ' +
-    'referrerpolicy="no-referrer-when-downgrade"></iframe>';
-  
+  mapContainer.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.8!2d100.8986733!3d12.9459773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU2JzQ1LjUiTiAxMDDCsDUzJzU1LjIiRQ!5e0!3m2!1sen!2sth!4v1234567890" width="100%" height="100%" style="border:0;border-radius:18px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
   console.log('✅ Map loaded via Google Maps iframe');
 }
 function fillPrintArea(){
@@ -328,7 +348,6 @@ function fillPrintArea(){
   var pa=$("#printArea");if(pa&&url)pa.innerHTML='<h2>Massarossa Pool Villa Pattaya</h2><p>384/28 Moo 6, Soi 12, North Pattaya Rd, Bang Lamung, Chonburi 20150</p><p>WhatsApp +66 63 446 7395 · Line @lucy.cpn</p><img src="'+url+'" alt="QR"><p>'+CONFIG.mapsLink+"</p>";
 }
 
-/* ---------- Init ---------- */
 document.addEventListener("DOMContentLoaded",function(){
   document.querySelectorAll("section").forEach(function(s){s.classList.add("rv")});
   if("IntersectionObserver" in window){
@@ -358,7 +377,7 @@ document.addEventListener("DOMContentLoaded",function(){
   $("#cRoute").href="https://www.google.com/maps/dir/?api=1&destination="+CONFIG.lat+","+CONFIG.lng;
   $("#rGoogle").href="https://www.google.com/maps/dir/?api=1&destination="+CONFIG.lat+","+CONFIG.lng;
   $("#rApple").href="https://maps.apple.com/?daddr="+CONFIG.lat+","+CONFIG.lng+"&dirflg=d";
-  $("#fwa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hello! Booking villa at Massarossa 🏝️");
+  $("#fwa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hello! Booking villa at Massarossa ️");
   $("#qrPrint").addEventListener("click",function(){window.print()});
   applyLang();
   loadAllBusy();
