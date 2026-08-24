@@ -1,5 +1,5 @@
 /* ============================================================
-MASSAROSSA POOL VILLA — app.js (Clean & Updated 2026-08)
+MASSAROSSA POOL VILLA — app.js (Clean 2026-08)
 ============================================================ */
 function $(s){return document.querySelector(s)}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
@@ -18,7 +18,7 @@ var forms={
   g:{villa:null,inD:null,outD:null,pre:function(f){return $("#g"+f)}}
 };
 
-window.addEventListener("error",function(e){var b=$("#errbar");if(b){b.style.display="block";b.textContent="️ "+e.message+" (line "+e.lineno+")"}});
+window.addEventListener("error",function(e){var b=$("#errbar");if(b){b.style.display="block";b.textContent="⚠️ "+e.message+" (line "+e.lineno+")"}});
 
 function applyLang(){
   document.documentElement.lang=lang;
@@ -43,7 +43,7 @@ function renderCards(){
       +'<div class="vbadges"><div class="vprice">'+L("from")+" "+v.price.toLocaleString()+" <small>"+L("night")+"</small></div>"
       +'<div class="vnote">'+L("note")+"</div></div></div>"
       +'<div class="vbody"><h3>'+esc(v.name)+'</h3><div class="vtag">'+esc(v.tag)+'</div>'
-      +'<div class="vspec"> '+v.beds+" · 🛁 "+v.baths+" · 👥 "+v.guests+(v.extra?"+"+v.extra:"")+(v.tv?' · 📺 '+v.tv+'"':"")+"</div>"
+      +'<div class="vspec">🛏 '+v.beds+" · 🛁 "+v.baths+" · 👥 "+v.guests+(v.extra?"+"+v.extra:"")+(v.tv?' · 📺 '+v.tv+'"':"")+"</div>"
       +'<div class="varea">'+v.area+" m²</div>"
       +'<div class="tags">'+v.amen.map(function(a){return '<span class="tag">'+L("am_"+a)+"</span>"}).join("")+"</div>"
       +'<div class="vbtns"><a class="btn ghost" href="'+v.id+'-villa.html">'+L("details")+"</a>"
@@ -104,7 +104,7 @@ function fillModal(id,keep){
   $("#mAmen").innerHTML=v.amen.map(function(a){return '<span class="tag">'+L("am_"+a)+"</span>"}).join("");
   $("#mWa").href="https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent("Hello! Interested in "+v.name+" at Massarossa.");
   $("#mLine").href=CONFIG.line;
-  var shTxt=encodeURIComponent(v.name+" — Massarossa 🏝️"),shUrl=encodeURIComponent(location.href.split("#")[0]);
+  var shTxt=encodeURIComponent(v.name+" — Massarossa ️"),shUrl=encodeURIComponent(location.href.split("#")[0]);
   $("#shWa").href="https://wa.me/?text="+shTxt+"%20"+shUrl;
   $("#shTg").href="https://t.me/share/url?url="+shUrl+"&text="+shTxt;
   $("#shNative").hidden=!navigator.share;
@@ -303,8 +303,7 @@ function calc(k){
   t.hidden=true; if(pp) pp.hidden=true; if(db) db.hidden=true;
   return 0;
 }
-/* ----------------------------------------------- */
-
+/* ---------- Дати/селекти ---------- */
 function onDateChange(k){
   var F=forms[k];F.inD=F.pre("In").value||null;F.outD=F.pre("Out").value||null;
   if(F.inD&&F.outD){
@@ -315,6 +314,7 @@ function onDateChange(k){
   scheduleRenderCal(k);calc(k);
 }
 
+/* ---------- Форми → WhatsApp ---------- */
 function submitForm(k,e){
   e.preventDefault();
   var F=forms[k],v=F.villa?villa(F.villa):null;
@@ -333,10 +333,11 @@ function submitForm(k,e){
   window.open("https://wa.me/"+CONFIG.whatsapp+"?text="+encodeURIComponent(msg),"_blank");
 }
 
+/* ---------- Карта / QR / друк / маршрути ---------- */
 var leafletMap=null;
 function fixMapSize(){if(leafletMap)setTimeout(function(){try{leafletMap.invalidateSize()}catch(e){}},60)}
 function initMap(){
-  console.log('🗺️ Initializing map...');
+  console.log('️ Initializing map...');
   var mapContainer = document.getElementById("map");
   if(!mapContainer) return;
   mapContainer.innerHTML = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.8!2d100.8986733!3d12.9459773!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDU2JzQ1LjUiTiAxMDDCsDUzJzU1LjIiRQ!5e0!3m2!1sen!2sth!4v1234567890" width="100%" height="100%" style="border:0;border-radius:18px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>';
@@ -348,6 +349,7 @@ function fillPrintArea(){
   var pa=$("#printArea");if(pa&&url)pa.innerHTML='<h2>Massarossa Pool Villa Pattaya</h2><p>384/28 Moo 6, Soi 12, North Pattaya Rd, Bang Lamung, Chonburi 20150</p><p>WhatsApp +66 63 446 7395 · Line @lucy.cpn</p><img src="'+url+'" alt="QR"><p>'+CONFIG.mapsLink+"</p>";
 }
 
+/* ---------- Init ---------- */
 document.addEventListener("DOMContentLoaded",function(){
   document.querySelectorAll("section").forEach(function(s){s.classList.add("rv")});
   if("IntersectionObserver" in window){
